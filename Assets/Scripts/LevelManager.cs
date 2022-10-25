@@ -22,9 +22,11 @@ public class LevelManager : MonoBehaviour
         {
             LevelButtons[i] = transform.GetChild(i).GetComponent<Button>();
             LevelButtons[i].GetComponentInChildren<Text>().text = (i + 1).ToString();
+            //LevelButtons[i].image = imageUnlock;
             if (i + 1 > ReachedLevel)
             {
                 LevelButtons[i].interactable = false;
+                //LevelButtons[i].image = imageLock;
             }
         }
 
