@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject m_player;
     public static GameManager instance;
     public int energy;
-    private CheckPositionPlayer checkPositionPlayer;
+
     public List<GameObject> traps;
     private bool _IsReady;
     public bool IsReady { get => _IsReady; set => _IsReady = value; }
@@ -18,14 +19,16 @@ public class GameManager : MonoBehaviour
     {
         MakeSingleton();
         traps = new List<GameObject>();
-        checkPositionPlayer = FindObjectOfType<CheckPositionPlayer>();
-
+        Debug.Log(m_player.transform.position);
+        
+        
     }
     void Start()
     {
         _IsReady = true;
-        //checkPositionPlayer = FindObjectOfType<CheckPositionPlayer>();
+        
         Debug.Log(traps.Count);
+        
     }
 
     
@@ -75,6 +78,9 @@ public class GameManager : MonoBehaviour
     
     public void WinGame()
     {
+        CheckPositionPlayer checkPositionPlayer;
+        checkPositionPlayer =FindObjectOfType<CheckPositionPlayer>();
+        
         if (checkPositionPlayer.CheckGirl())
         {
             Debug.Log("Win roi");
@@ -92,7 +98,8 @@ public class GameManager : MonoBehaviour
 
     private void LoseGame()
     {
-        if(energy <=0 && !checkPositionPlayer.CheckGirl() )//khong dung canh dua con gai
+        CheckPositionPlayer checkPositionPlayer=FindObjectOfType<CheckPositionPlayer>();
+        if (energy <=0 && !checkPositionPlayer.CheckGirl() )//khong dung canh dua con gai
         {
             Debug.Log("Lose Game");
             UiManager.instance.ShowGameOver();
