@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CheckPositionPlayer : MonoBehaviour
 {
-    public static CheckPositionPlayer instance;
+    //public static CheckPositionPlayer instance;
 
     void Awake()
     {
-        MakeSingleton();
+       // MakeSingleton();
     }
     public  bool CheckGirl()//Is the next position a girl?
     {
@@ -27,15 +27,15 @@ public class CheckPositionPlayer : MonoBehaviour
 
         return false;
     }
-    public void MakeSingleton()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }    
+    //public void MakeSingleton()
+    //{
+    //    if(instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //    else
+    //    {
+    //     //Destroy(gameObject);
+    //    }
+    //}    
 }

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int energy;
-  
+    private CheckPositionPlayer checkPositionPlayer;
     public List<GameObject> traps;
     private bool _IsReady;
     public bool IsReady { get => _IsReady; set => _IsReady = value; }
@@ -18,12 +18,13 @@ public class GameManager : MonoBehaviour
     {
         MakeSingleton();
         traps = new List<GameObject>();
-        
+        checkPositionPlayer = FindObjectOfType<CheckPositionPlayer>();
 
     }
     void Start()
     {
         _IsReady = true;
+        //checkPositionPlayer = FindObjectOfType<CheckPositionPlayer>();
         Debug.Log(traps.Count);
     }
 
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
     
     public void WinGame()
     {
-        if (CheckPositionPlayer.instance.CheckGirl())
+        if (checkPositionPlayer.CheckGirl())
         {
             Debug.Log("Win roi");
             if (PlayerPrefs.GetInt("ReachedLevel")==PlayerPrefs.GetInt("Level_Current"))//da thang man cuoi cung thi mo khoa man ke tiep
@@ -84,13 +85,14 @@ public class GameManager : MonoBehaviour
                LevelManager.instance.Unlock(PlayerPrefs.GetInt("ReachedLevel"));
             }
             UiManager.instance.ShowWinGame();
+            //Player.instance = null;
             _IsReady = false;
         }
     }
 
     private void LoseGame()
     {
-        if(energy <=0 && !CheckPositionPlayer.instance.CheckGirl() )//khong dung canh dua con gai
+        if(energy <=0 && !checkPositionPlayer.CheckGirl() )//khong dung canh dua con gai
         {
             Debug.Log("Lose Game");
             UiManager.instance.ShowGameOver();
