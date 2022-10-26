@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,6 +50,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene("GamePlay");
+    }
     void MakeSingleton()
     {
         if (instance == null)
@@ -70,6 +77,12 @@ public class GameManager : MonoBehaviour
         if (CheckPositionPlayer.instance.CheckGirl())
         {
             Debug.Log("Win roi");
+            if (PlayerPrefs.GetInt("ReachedLevel")==PlayerPrefs.GetInt("Level_Current"))//da thang man cuoi cung thi mo khoa man ke tiep
+            {
+                Debug.Log("Bang nhau");
+                PlayerPrefs.SetInt("ReachedLevel",PlayerPrefs.GetInt("Level_Current"));
+               LevelManager.instance.Unlock(PlayerPrefs.GetInt("ReachedLevel"));
+            }
             UiManager.instance.ShowWinGame();
             _IsReady = false;
         }

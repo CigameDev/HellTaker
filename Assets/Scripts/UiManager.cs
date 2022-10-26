@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject m_panelWinGame;
     [SerializeField] private GameObject m_panelLoseGame;
     [SerializeField] private GameObject m_panelHome;
+    [SerializeField] private GameObject m_panelLevel;
    
     private int m_currentLevel;
     public  GameObject m_objLevel, m_nextLevel;
@@ -18,7 +19,7 @@ public class UiManager : MonoBehaviour
         MakeSingleton();
 
         m_currentLevel = PlayerPrefs.GetInt("current_level", 1);
-
+       
     }
     void Start()
     {
@@ -40,7 +41,12 @@ public class UiManager : MonoBehaviour
     public void ShowHome()
     {
         m_panelHome.SetActive(true);
-    }    
+    }
+    public void ShowLevel()
+    {
+        m_panelWinGame.SetActive(false);
+        m_panelLevel.SetActive(true);
+    }
     void MakeSingleton()
     {
         if(instance == null)
