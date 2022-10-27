@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Sprite spriteUnlock;
     [SerializeField] private Sprite spriteLock;
     //private int m_LevelCurrent;
+
+    private BaseLevelCtrl _levelCtrl;
+
     void Awake()
     {
         MakeSingleton();
@@ -58,6 +61,8 @@ public class LevelManager : MonoBehaviour
         
         if(UiManager.instance.m_objLevel!=null)Destroy(UiManager.instance.m_objLevel);
         UiManager.instance.m_objLevel = Instantiate(Resources.Load<GameObject>("Levels/level " + iText));
+        _levelCtrl = UiManager.instance.m_objLevel.GetComponent<BaseLevelCtrl>();
+    //    _levelCtrl.MainPlayer : truy cap player thong qua bien nay
         gameObject.transform.parent.gameObject.SetActive(false);//an danh sach cac level di
         GameManager.instance.IsReady = true;
     }

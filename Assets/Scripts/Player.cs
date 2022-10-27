@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public static Player instance;
     public bool isAction;
     bool m_Unlock=false;
+    public BaseLevelCtrl _levelCtrl;
 
     private void Awake()
     {
@@ -100,8 +101,10 @@ public class Player : MonoBehaviour
             isAction=true;
             this.transform.DOMoveX(this.transform.position.x + 1f, 0.2f).OnComplete(() =>
             {
-                GameManager.instance.ReduceEnergy(1);
-                GameManager.instance.WinGame();
+             //   GameManager.instance.ReduceEnergy(1);
+            //    GameManager.instance.WinGame();
+                _levelCtrl.OnMoveStep();
+                _levelCtrl.OnWinGame();
             }
            );
             if (col.col1)
@@ -117,7 +120,8 @@ public class Player : MonoBehaviour
                 }
                 else if (col.col1.gameObject.tag == "Trap" || col.col1.gameObject.tag == "Rong")
                 {
-                    GameManager.instance.ReduceEnergy(1);
+                //    GameManager.instance.ReduceEnergy(1);
+                    _levelCtrl.OnMoveStep();
                 }
             }
         }    
@@ -149,7 +153,8 @@ public class Player : MonoBehaviour
                 }
                 else if (col.col1.gameObject.tag == "Trap" || col.col1.gameObject.tag == "Rong")
                 {
-                    GameManager.instance.ReduceEnergy(1);
+                //    GameManager.instance.ReduceEnergy(1);
+                    _levelCtrl.OnMoveStep();
                 }
             }
         }
